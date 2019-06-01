@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterhub/myCard.dart';
 import 'package:flutterhub/rank.dart';
+import 'package:flutterhub/showcase.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(),
       routes: {
         '/quiz': (context) => SecondPage(),
-        '/showcase': (context) => SecondPage(),
+        '/showcase': (context) => new ShowcaseView(),
         '/ranking': (context) => RankingScreen()
       },
     );
@@ -57,7 +58,8 @@ class MyHomePage extends StatelessWidget {
               title: 'Quiz',
               route: '/quiz',
             ),
-            MyCard(color: Colors.blue[200], title: 'Showcase', route: '/showcase'),
+            MyCard(
+                color: Colors.blue[200], title: 'Showcase', route: '/showcase'),
             MyCard(
               color: Colors.blue[100],
               title: 'Rank',

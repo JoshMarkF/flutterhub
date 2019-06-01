@@ -15,11 +15,10 @@ class Showcase {
   Showcase(this.title, this.description);
 }
 
-class MyApp extends StatelessWidget {
+class ShowcaseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: new Scaffold(
+    return new Scaffold(
             appBar: new AppBar(
               title: Text('Showcase'),
             ),
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
                 child: new ShowcaseList(showcases: [
               new Showcase("Showcase 1", "Description 1"),
               new Showcase("Showcase 2", "Description 2"),
-            ]))));
+            ])));
   }
 }
 
