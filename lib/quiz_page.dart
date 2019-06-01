@@ -83,43 +83,45 @@ class QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Stack(
-      fit: StackFit.expand,
-      children: <Widget>[
-        new Column(
-          children: <Widget>[
-            new QuestionText(questionText, quesNo),
-            new AnswerButton(true, () => handleAnswer(true)),
-            new AnswerButton(false, () => handleAnswer(false))
-          ],
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Quiz'),
         ),
-        (showOverlay)
-            ? new CorrectWrongOverLay(isCorrect, () {
-                currQues = quiz.getNextQues;
-                if (currQues != null) {
-                  this.setState(() {
-                    showOverlay = false;
-                    questionText = currQues.questionText;
-                    quesNo = quiz.currentQuesNo;
-                  });
-                } else {
-                  debugPrint('quiz end');
-                  this.setState(() {
-                    showOverlay = false;
-                    showResult = true;
-                  });
-                }
-              })
-            : new Container(),
-        (showResult)
-            ? new ResultOverlay(quiz.score, () {
-                debugPrint('result');
-                this.setState(() {
-                  showResult = false;
-                });
-              })
-            : new Container(),
-      ],
-    );
+        body: new Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            new Column(
+              children: <Widget>[
+                new QuestionText(questionText, quesNo),
+                new AnswerButton(true, () => handleAnswer(true)),
+                new AnswerButton(false, () => handleAnswer(false))
+              ],
+            ),
+            (showOverlay)
+                ? new CorrectWrongOverLay(isCorrect, () {
+                    currQues = quiz.getNextQues;
+                    if (currQues != null) {
+                      this.setState(() {
+                        showOverlay = false;
+                        questionText = currQues.questionText;
+                        quesNo = quiz.currentQuesNo;
+                      });
+                    } else {
+                      this.setState(() {
+                        showOverlay = false;
+                        showResult = true;
+                      });
+                    }
+                  })
+                : new Container(),
+            (showResult)
+                ? new ResultOverlay(quiz.score, () {
+                    this.setState(() {
+                      showResult = false;
+                    });
+                  })
+                : new Container(),
+          ],
+        ));
   }
 }
