@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 class CorrectWrongOverLay extends StatefulWidget {
   final bool is_correct;
@@ -13,9 +12,7 @@ class CorrectWrongOverLay extends StatefulWidget {
   }
 }
 
-class CorrectWrongOverLayState extends State<CorrectWrongOverLay>
-    with SingleTickerProviderStateMixin {
-
+class CorrectWrongOverLayState extends State<CorrectWrongOverLay> {
   @override
   void initState() {
     super.initState();
@@ -31,10 +28,8 @@ class CorrectWrongOverLayState extends State<CorrectWrongOverLay>
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Container(
-              child:  new Icon((widget.is_correct) ? Icons.done : Icons.clear,
-                    size: 80.0),
-              decoration: new BoxDecoration(
-                  color: Colors.white, shape: BoxShape.circle),
+              child: new Icon((widget.is_correct) ? Icons.done : Icons.clear, size: 80.0),
+              decoration: new BoxDecoration(color: Colors.white, shape: BoxShape.circle),
             ),
             new Padding(padding: new EdgeInsets.all(10.0)),
             new Text((widget.is_correct) ? "Correct" : "Incorrect",
