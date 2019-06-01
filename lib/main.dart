@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterhub/myCard.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,6 +22,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(),
+      routes: {
+        '/quiz': (context) => SecondPage(),
+        '/showcase': (context) => SecondPage(),
+        '/ranking': (context) => SecondPage()
+      },
     );
   }
 }
@@ -34,51 +40,27 @@ class SecondPage extends StatelessWidget {
   }
 }
 
-class NavLink {
-  final String title;
-  final Widget _widget;
-  NavLink(this.title, this._widget);
-
-  void onPress(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => _widget));
-  }
-}
-
 class MyHomePage extends StatelessWidget {
-  final navLinks = [
-    NavLink('Quiz', SecondPage()),
-    NavLink('Showcase', SecondPage()),
-    NavLink('Ranking', SecondPage()),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: Text('Flutter Hub')),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ...navLinks.map((item) {
-              return Padding(
-                  padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                  child: SizedBox(
-                      height: 50,
-                      child: OutlineButton(
-                        child: Text(item.title),
-                        textColor: Colors.white,
-                        onPressed: () => item.onPress(context),
-                        borderSide: BorderSide(color: Colors.white),
-                      )));
-            })
-          ],
-        ),
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Color(0xff055A9D), Color(0xff5FC9F8)])),
+      appBar: AppBar(title: Text('Flutter Hub')),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          MyCard(
+            color: Colors.blue[300],
+            title: 'Quiz',
+            route: '/quiz',
+          ),
+          MyCard(color: Colors.blue[200], title: 'Showcase', route: '/showcase'),
+          MyCard(
+            color: Colors.blue[100],
+            title: 'Rank',
+            route: '/ranking',
+          )
+        ],
       ),
     );
   }
