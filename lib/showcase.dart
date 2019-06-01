@@ -54,7 +54,8 @@ class _ShowCaseListState extends State<ShowcaseList> {
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ShowcaseExample()),
+                          builder: (context) =>
+                              ShowcaseExample(showcase.title)),
                     ),
                 contentPadding: new EdgeInsets.symmetric(vertical: 8.0),
                 leading: new Image.asset('assets/flutter_code2.png'),
@@ -70,6 +71,8 @@ class _ShowCaseListState extends State<ShowcaseList> {
 }
 
 class ShowcaseExample extends StatelessWidget {
+  ShowcaseExample(String showcaseTitle) : showcaseTitle = showcaseTitle;
+  final String showcaseTitle;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -94,7 +97,7 @@ class ShowcaseExample extends StatelessWidget {
                     padding: new EdgeInsets.all(8.0),
                     child: SingleChildScrollView(
                         child: new Image.asset(
-                      'assets/flutter_code1.png',
+                      getShowcaseImage(showcaseTitle),
                       height: 450.0,
                     )))),
             new ShowcaseCommentList(comments: [
@@ -106,6 +109,23 @@ class ShowcaseExample extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String getShowcaseImage(showcaseTitle) {
+    switch (showcaseTitle) {
+      case "Showcase 1":
+        {
+          return "assets/flutter_code1.png";
+        }
+      case "Showcase 2":
+        {
+          return "assets/flutter_code2.png";
+        }
+      default:
+        {
+          return "assets/flutter_code1.png";
+        }
+    }
   }
 }
 
