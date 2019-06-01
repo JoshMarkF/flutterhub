@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 class ResultOverlay extends StatefulWidget {
   final int score;
@@ -13,9 +12,7 @@ class ResultOverlay extends StatefulWidget {
   }
 }
 
-class ResultOverlayState extends State<ResultOverlay>
-    with SingleTickerProviderStateMixin {
-
+class ResultOverlayState extends State<ResultOverlay> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
@@ -26,16 +23,16 @@ class ResultOverlayState extends State<ResultOverlay>
     return new Material(
       color: Colors.black45,
       child: new InkWell(
-        onTap: () => widget._onTap(),
+        onTap: () => Navigator.pop(context),
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Container(
-              child:  new Text(widget.score.toString(),
+              child: new Text(widget.score.toString(),
                   style: new TextStyle(fontSize: 50.0, color: Colors.black)),
             ),
             new Padding(padding: new EdgeInsets.all(10.0)),
-            new Text((widget.score > 1 ) ? "Well Done" : "You Suck",
+            new Text((widget.score > 1) ? "Well Done" : "You Suck",
                 style: new TextStyle(fontSize: 50.0, color: Colors.black))
           ],
         ),

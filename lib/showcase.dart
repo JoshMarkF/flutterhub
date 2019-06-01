@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(ShowcaseExample());
-
 class Comment {
   String title;
   String commentbody;
@@ -19,14 +17,14 @@ class ShowcaseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-            appBar: new AppBar(
-              title: Text('Showcase'),
-            ),
-            body: Container(
-                child: new ShowcaseList(showcases: [
-              new Showcase("Showcase 1", "Description 1"),
-              new Showcase("Showcase 2", "Description 2"),
-            ])));
+        appBar: new AppBar(
+          title: Text('Showcase'),
+        ),
+        body: Container(
+            child: new ShowcaseList(showcases: [
+          new Showcase("Showcase 1", "Description 1"),
+          new Showcase("Showcase 2", "Description 2"),
+        ])));
   }
 }
 
@@ -53,7 +51,11 @@ class _ShowCaseListState extends State<ShowcaseList> {
             padding: new EdgeInsets.symmetric(vertical: 8.0),
             children: showcases.map((Showcase showcase) {
               return new ListTile(
-                onTap: null,
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ShowcaseExample()),
+                    ),
                 contentPadding: new EdgeInsets.symmetric(vertical: 8.0),
                 leading: new Image.asset('assets/flutter_code2.png'),
                 title: Text(showcase.title),
@@ -70,40 +72,37 @@ class _ShowCaseListState extends State<ShowcaseList> {
 class ShowcaseExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              tabs: [
-                new Container(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text('Screenshot')),
-                new Container(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text('Comments')),
-              ],
-            ),
-            title: Text('Showcase'),
-          ),
-          body: TabBarView(
-            children: [
-              Center(
-                  child: Container(
-                      padding: new EdgeInsets.all(8.0),
-                      child: SingleChildScrollView(
-                          child: new Image.asset(
-                        'assets/flutter_code1.png',
-                        height: 450.0,
-                      )))),
-              new ShowcaseCommentList(comments: [
-                new Comment('Awesome Code', 'I love this code so much', 'A'),
-                new Comment('Awesome Code', 'I love this code so much', 'B'),
-                new Comment('Awesome Code', 'I love this code so much', 'C'),
-              ])
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: TabBar(
+            tabs: [
+              new Container(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text('Screenshot')),
+              new Container(
+                  padding: const EdgeInsets.all(10.0), child: Text('Comments')),
             ],
           ),
+          title: Text('Showcase'),
+        ),
+        body: TabBarView(
+          children: [
+            Center(
+                child: Container(
+                    padding: new EdgeInsets.all(8.0),
+                    child: SingleChildScrollView(
+                        child: new Image.asset(
+                      'assets/flutter_code1.png',
+                      height: 450.0,
+                    )))),
+            new ShowcaseCommentList(comments: [
+              new Comment('Awesome Code', 'I love this code so much', 'A'),
+              new Comment('Awesome Code', 'I love this code so much', 'B'),
+              new Comment('Awesome Code', 'I love this code so much', 'C'),
+            ])
+          ],
         ),
       ),
     );

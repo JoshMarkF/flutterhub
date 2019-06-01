@@ -16,7 +16,6 @@ class MyCard extends StatelessWidget {
             child: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
-                print('hello');
                 Navigator.of(context).pushNamed(route);
               },
               child: Stack(children: [
