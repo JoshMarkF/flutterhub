@@ -21,7 +21,7 @@ class QuestionTextState extends State<QuestionText> {
     return new Material(
         child: new Center(
       child: new Container(
-        padding: new EdgeInsets.symmetric(vertical: 30.0),
+        padding: new EdgeInsets.symmetric(vertical: 30.0, horizontal: 8),
         child: new Text(
           "Question " + widget._quesNo.toString() + ". " + widget._question,
         ),
