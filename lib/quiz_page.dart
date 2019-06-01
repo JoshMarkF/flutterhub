@@ -18,23 +18,23 @@ class Quiz {
   int _score = 0;
   int _currentQuesIndex = -1;
 
-  Quiz(this._questions){
+  Quiz(this._questions) {
     _questions.shuffle();
   }
 
   //getters
-  int get score => score;
+  int get score => _score;
   List<Question> get questions => _questions;
-  int get currentQuesNo => _currentQuesIndex+1;
+  int get currentQuesNo => _currentQuesIndex + 1;
   int get totalNoOfQues => _questions.length;
 
   Question get getNextQues {
-    if(++_currentQuesIndex >= totalNoOfQues) return null;
+    if (++_currentQuesIndex >= totalNoOfQues) return null;
     return _questions[_currentQuesIndex];
   }
 
   void updateScore(bool isCorrect) {
-    if(isCorrect) _score++;
+    if (isCorrect) _score++;
   }
 }
 
@@ -93,28 +93,32 @@ class QuizPageState extends State<QuizPage> {
             new AnswerButton(false, () => handleAnswer(false))
           ],
         ),
-        (showOverlay) ? new CorrectWrongOverLay(isCorrect, () {
-          currQues = quiz.getNextQues;
-          if(currQues != null){
-            this.setState((){
-                showOverlay = false;
-                questionText = currQues.questionText;
-                quesNo = quiz.currentQuesNo;
-            });
-          } else {
-            debugPrint('quiz end');
-            this.setState(() {
-              showOverlay = false;
-              showResult = true;
-            });
-          }
-        }) : new Container(),
-        (showResult) ? new ResultOverlay(quiz.score, () {
-          debugPrint('result');
-          this.setState(() {
-            showResult = false;
-          });
-        }) : new Container(),
+        (showOverlay)
+            ? new CorrectWrongOverLay(isCorrect, () {
+                currQues = quiz.getNextQues;
+                if (currQues != null) {
+                  this.setState(() {
+                    showOverlay = false;
+                    questionText = currQues.questionText;
+                    quesNo = quiz.currentQuesNo;
+                  });
+                } else {
+                  debugPrint('quiz end');
+                  this.setState(() {
+                    showOverlay = false;
+                    showResult = true;
+                  });
+                }
+              })
+            : new Container(),
+        (showResult)
+            ? new ResultOverlay(quiz.score, () {
+                debugPrint('result');
+                this.setState(() {
+                  showResult = false;
+                });
+              })
+            : new Container(),
       ],
     );
   }
