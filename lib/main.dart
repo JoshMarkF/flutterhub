@@ -26,8 +26,6 @@ class MyApp extends StatelessWidget {
 }
 
 class SecondPage extends StatelessWidget {
-  const SecondPage({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,27 +34,51 @@ class SecondPage extends StatelessWidget {
   }
 }
 
+class NavLink {
+  final String title;
+  final Widget _widget;
+  NavLink(this.title, this._widget);
+
+  void onPress(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => _widget));
+  }
+}
+
 class MyHomePage extends StatelessWidget {
-  final navLinks = ['Questions', 'Widgets', 'Showcase'];
+  final navLinks = [
+    NavLink('Quiz', SecondPage()),
+    NavLink('Showcase', SecondPage()),
+    NavLink('Ranking', SecondPage()),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Flutter Hub')),
-      body: Center(
+      // appBar: AppBar(title: Text('Flutter Hub')),
+      body: Container(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('ProgressBar'),
-            ...navLinks.map((title) {
-              return RaisedButton(
-                child: Text(title),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SecondPage()));
-                },
-              );
+            ...navLinks.map((item) {
+              return Padding(
+                  padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                  child: SizedBox(
+                      height: 50,
+                      child: OutlineButton(
+                        child: Text(item.title),
+                        textColor: Colors.white,
+                        onPressed: () => item.onPress(context),
+                        borderSide: BorderSide(color: Colors.white),
+                      )));
             })
           ],
         ),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0xff055A9D), Color(0xff5FC9F8)])),
       ),
     );
   }
