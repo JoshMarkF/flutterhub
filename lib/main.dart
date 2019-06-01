@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterhub/myCard.dart';
+import 'package:flutterhub/rank.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/quiz': (context) => SecondPage(),
         '/showcase': (context) => SecondPage(),
-        '/ranking': (context) => SecondPage()
+        '/ranking': (context) => RankingScreen()
       },
     );
   }
@@ -45,22 +46,25 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Flutter Hub')),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          MyCard(
-            color: Colors.blue[300],
-            title: 'Quiz',
-            route: '/quiz',
-          ),
-          MyCard(color: Colors.blue[200], title: 'Showcase', route: '/showcase'),
-          MyCard(
-            color: Colors.blue[100],
-            title: 'Rank',
-            route: '/ranking',
-          )
-        ],
+      body: Container(
+        decoration: BoxDecoration(color: Colors.blue),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            MyCard(
+              color: Colors.blue[300],
+              title: 'Quiz',
+              route: '/quiz',
+            ),
+            MyCard(color: Colors.blue[200], title: 'Showcase', route: '/showcase'),
+            MyCard(
+              color: Colors.blue[100],
+              title: 'Rank',
+              route: '/ranking',
+            )
+          ],
+        ),
       ),
     );
   }
